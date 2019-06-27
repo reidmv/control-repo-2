@@ -1,0 +1,5 @@
+{
+  "description": "Ensure user_data.conf is present to help with certain Hiera lookups",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin"
+}

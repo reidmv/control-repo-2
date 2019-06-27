@@ -1,0 +1,14 @@
+{
+  "description": "Add new keys or modify existing keys in a HOCON conf file.",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "parameters": {
+    "file": {
+      "description": "The .conf file to edit.",
+      "type": "String[1]"
+    },
+    "hash":{
+      "description": "A hash with key/value pairs to add to the .conf file. This should be in JSON format. If running on the command line, an example would be:\nhash='{\"key1\":\"value1\",\"key2\":[\"value2\"],\"key3\":true}'",
+      "type": "Hash"
+    }
+  }
+}

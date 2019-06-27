@@ -1,0 +1,14 @@
+{
+  "description": "Removes one or more keys in a HOCON conf file.",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "parameters": {
+    "file": {
+      "description": "The .conf file to remove the key from.",
+      "type": "String[1]"
+    },
+    "keys":{
+      "description": "A string or array of strings of keys to remove.",
+      "type": "Variant[String[1],Array[String]]"
+    }
+  }
+}

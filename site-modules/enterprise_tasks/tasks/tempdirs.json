@@ -1,0 +1,10 @@
+{
+  "description": "Create unique temp directory in /tmp on a given host, secured 700.",
+  "input_method": "environment",
+  "parameters": {
+    "purpose": {
+      "description": "Optional descriptive text for the tmpdir template",
+      "type": "Optional[String]"
+    }
+  }
+}

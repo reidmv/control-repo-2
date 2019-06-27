@@ -1,0 +1,27 @@
+{
+  "description": "Enable a given replica",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "host": {
+      "description": "The certname of the replica",
+      "type": "String[1]"
+    },
+    "topology": {
+      "description": "The topology of the PE installation",
+      "type": "String[1]"
+    },
+    "skip_agent_config": {
+      "description": "Whether or not to skip setting agent config options",
+      "type": "Optional[Boolean]"
+    },
+    "agent_server_urls": {
+      "description": "The value to use in the agent server_list setting",
+      "type": "Optional[String]"
+    },
+    "pcp_brokers": {
+      "description": "The list of PCP brokers to configure agents with",
+      "type": "Optional[String]"
+    }
+  }
+}

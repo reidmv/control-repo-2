@@ -1,0 +1,11 @@
+{
+  "description": "Enable the puppet agent",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": { 
+    "enable_pxp": {
+      "description": "Whether we are also enabling pxp agent or not",
+      "type": "Boolean"
+    }
+   }
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Find certificate and fetch issue date of that certificate",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin"
+}

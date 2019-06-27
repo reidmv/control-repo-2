@@ -1,0 +1,11 @@
+{
+  "description": "Run puppet infrastructure configure --no-recover",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin",
+  "parameters": {
+    "agent_pid": {
+      "description": "The PID of the process with the agent lock. Used for bypassing agent locking in the configure action.",
+      "type": "Optional[Integer]"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+#######################################################################
+# This file is managed by Puppet Enterprise during install and upgrade.
+# Do not modify.
+---
+version: 5
+defaults:  # Used for any hierarchy level that omits these keys.
+  datadir: /etc/puppetlabs/enterprise/conf.d
+  data_hash: 'pe_infrastructure::data'
+
+hierarchy:
+  - name: "Module Data"
+  # The pe_infrastructure::data() function relies on PuppetX::Puppetlabs::Meep::Config
+  # to lookup enterprise hiera data, and the Config class has its own path set.
+  # This might change in the future, but for right now, no path is set in the
+  # module hierarchy layer.  If a path was set here, and it was absent, hiera would
+  # fail to load the pe_infrastructure::data() hash function altogether.

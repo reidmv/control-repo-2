@@ -1,0 +1,10 @@
+{
+  "description": "Disable agent services on a master host",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "parameters": {
+    "disable_pxp": {
+      "description": "Whether we are also disabling pxp agent or not",
+      "type": "Boolean"
+    }
+   }
+}

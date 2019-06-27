@@ -1,0 +1,5 @@
+{
+  "description": "Retrieve enterprise user_data.conf and nodes/* from the host. File contents are returned in the enterprise_data Hash.",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin"
+}

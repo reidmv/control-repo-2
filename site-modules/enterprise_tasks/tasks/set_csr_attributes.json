@@ -1,0 +1,14 @@
+{
+  "description": "Sets one or more values in the csr_attributes.yaml file. Creates the file if it does not exist.",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "parameters": {
+    "extension_requests": {
+      "description": "A hash of key/value pairs to include in the extension_requests section of csr_attributes.yaml.",
+      "type": "Optional[Hash]"
+    },
+    "custom_attributes":{
+      "description": "A hash of key/value pairs to include in the custom_attributes section of csr_attributes.yaml.",
+      "type": "Optional[Hash]"
+    }
+  }
+}

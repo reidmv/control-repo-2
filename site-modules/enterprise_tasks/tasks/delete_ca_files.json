@@ -1,0 +1,5 @@
+{
+  "description": "Remove CA files on a given master host",
+  "files": ["ruby_task_helper/files/task_helper.rb"],
+  "input_method": "stdin"
+}
