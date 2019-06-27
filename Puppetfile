@@ -15,3 +15,11 @@ forge 'https://forge.puppet.com'
 #mod 'apache',
 #  :git    => 'https://github.com/puppetlabs/puppetlabs-apache',
 #  :branch => 'docs_experiment'
+mod 'puppetlabs-ruby_task_helper', '0.3.0'
+mod 'puppetlabs-bolt_shim', '0.3.0'
+mod 'puppetlabs-apply_helpers', '0.1.0'
+mod 'puppetlabs-stdlib', '6.0.0'
+
+mod 'reidmv-pe_ha_failover',
+  git: 'https://github.com/reidmv/reidmv-pe_ha_failover.git',
+  ref: 'master'
