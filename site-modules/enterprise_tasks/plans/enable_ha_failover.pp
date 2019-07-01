@@ -54,7 +54,7 @@ plan enterprise_tasks::enable_ha_failover(
   )
   upload_file('/etc/puppetlabs/enterprise/hiera.yaml', '/etc/puppetlabs/enterprise/hiera.yaml', $prev_master)
   run_task('enterprise_tasks::provision_replica', $curr_master,
-    host                => $prev_master.host,
+    host                => $prev_master_certname,
     replication_timeout => $replication_timeout_secs,
   )
   run_task('enterprise_tasks::enable_replica', $curr_master,
