@@ -31,5 +31,5 @@ plan enterprise_tasks::convert_legacy_compiler(
     }
   }
 
-  run_plan(enterprise_tasks::verify_nodes, node_to_verify => $compiler, expected_type => 'compiler_puppetdb')
+  run_plan(enterprise_tasks::verify_nodes, node_to_verify => $compiler, expected_type => 'pe_compiler')
 }

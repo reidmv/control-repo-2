@@ -18,6 +18,11 @@ plan enterprise_tasks::enable_ha_failover(
       | EOT
   }
 
+  # The indexing removes the trailing newline. chomp() is not a core function
+  $prev_master_certname = run_command(@(EOS/L), $prev_master).first[stdout][0,-2]
+    /opt/puppetlabs/bin/puppet config print certname
+    |-EOS
+
   wait_until_available([$prev_master, $curr_master], wait_time => 0)
 
   run_plan('enterprise_tasks::verify_nodes',
@@ -33,7 +38,7 @@ plan enterprise_tasks::enable_ha_failover(
   }
   run_task('enterprise_tasks::remove_enterprise_conf_files', $prev_master)
   run_task('enterprise_tasks::remove_certificate_artifacts', $curr_master,
-    certname => $prev_master.host,
+    certname => $prev_master_certname,
   )
   run_task('enterprise_tasks::drop_pglogical_databases', $prev_master)
   run_task('enterprise_tasks::delete_ssl_dir', $prev_master)
@@ -42,7 +47,7 @@ plan enterprise_tasks::enable_ha_failover(
     exit_codes     => [1],
   )
   run_task('enterprise_tasks::sign', $curr_master,
-    host => $prev_master.host,
+    host => $prev_master_certname,
   )
   run_task('enterprise_tasks::run_puppet', $prev_master,
     alternate_host => $curr_master.host,
@@ -53,7 +58,7 @@ plan enterprise_tasks::enable_ha_failover(
     replication_timeout => $replication_timeout_secs,
   )
   run_task('enterprise_tasks::enable_replica', $curr_master,
-    host              => $prev_master.host,
+    host              => $prev_master_certname,
     topology          => $topology,
     skip_agent_config => $skip_agent_config,
     agent_server_urls => $agent_server_urls,
