@@ -15,7 +15,7 @@ plan enterprise_tasks::configure_agent(
 ) {
   $constants = constants()
   $master = run_command('facter fqdn','localhost').first['stdout'].strip
-  run_plan(enterprise_tasks::verify_nodes, node_to_verify => 'localhost', expected_type => 'master')
+  run_plan(enterprise_tasks::verify_nodes, nodes => 'localhost', expected_type => 'master')
   wait_until_available([$agent], wait_time => 0)
 
   $agent_version = run_task(puppet_agent::version, $agent).first().value()['version']
@@ -26,7 +26,7 @@ plan enterprise_tasks::configure_agent(
     if $agent_version != $master_agent_version {
       # pe_bootstrap appears not to add the extension requests if you are upgrading the agent, so we'll need
       # to do agent cert regen after this in that case. We should first verify this is not an infra node already.
-      run_plan(enterprise_tasks::verify_nodes, node_to_verify => $agent, expected_type => 'agent')
+      run_plan(enterprise_tasks::verify_nodes, nodes => $agent, expected_type => 'agent')
       run_task(pe_bootstrap, $agent, cacert_content => $cacert_contents, master => $master)
     }
     if $extension_requests or $custom_attributes {

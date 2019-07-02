@@ -1,4 +1,4 @@
-# Be careful when using a node_type other than agent, as other considerations may be need to be made
+# Be careful when using a node_type other than agent, as other considerations may need to be made
 # when regenerating a certificate on an infrastructure node, such as restarting services.
 plan enterprise_tasks::agent_cert_regen(
   TargetSpec $agent,
@@ -9,12 +9,10 @@ plan enterprise_tasks::agent_cert_regen(
   Optional[Boolean] $manage_pxp_service = true,
 ) {
   wait_until_available([$agent, $caserver], wait_time => 0)
-  $service_status = run_command('puppet resource service puppet', $agent).first().value()[stdout]
-  out::message('Puppet Agent resource service found in state:')
-  out::message($service_status)
+  $status_hash = run_plan(enterprise_tasks::get_service_status, target => $agent, service => 'puppet')
   $result_or_error = catch_errors() || {
-    run_plan(enterprise_tasks::verify_nodes, node_to_verify => $caserver, expected_type => 'ca')
-    run_plan(enterprise_tasks::verify_nodes, node_to_verify => $agent, expected_type => $node_type)
+    run_plan(enterprise_tasks::verify_nodes, nodes => $caserver, expected_type => 'ca')
+    run_plan(enterprise_tasks::verify_nodes, nodes => $agent, expected_type => $node_type)
 
     $original_start_date = run_task(enterprise_tasks::fetch_cert_date, $agent)
     run_task(enterprise_tasks::clean, $caserver, host => $agent)
@@ -49,20 +47,15 @@ plan enterprise_tasks::agent_cert_regen(
     }
 
     $new_start_date = run_task(enterprise_tasks::fetch_cert_date, $agent)
-    apply($agent) {
-      $service_status
-    }
+
     if $original_start_date.first().value()['startdate'] == $new_start_date.first().value()['startdate'] {
       fail_plan("Certificate for ${agent} was not correctly regenerated")
     }
   }
   out::message('Applying original agent state...')
-  apply($agent) {
-    $service_status
-  }
+  run_command("puppet resource service puppet ensure=${status_hash[status]} enable=${status_hash[enabled]}", $agent)
+
   if $result_or_error =~ Error {
     return fail_plan($result_or_error)
-  } else {
-    return $result_or_error
   }
 }

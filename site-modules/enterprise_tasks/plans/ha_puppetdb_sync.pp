@@ -5,11 +5,9 @@ plan enterprise_tasks::ha_puppetdb_sync(
   $primary = run_command('facter fqdn','localhost').first['stdout'].strip
   $replica_pql = "resources[certname] { type = 'Class' and title = 'Puppet_enterprise::Profile::Primary_master_replica' }"
   $replica = puppetdb_query($replica_pql)[0][certname]
-  $service_status = run_command('puppet resource service puppet', $primary).first().value()[stdout]
-  out::message('Puppet Agent resource service found in state:')
-  out::message($service_status)
+  $status_hash = run_plan(enterprise_tasks::get_service_status, target => $primary, service => 'puppet')
   $result_or_error = catch_errors() || {
-    run_task(enterprise_tasks::disable_agent_services, $primary, disable_pxp => true)
+    run_task(enterprise_tasks::disable_agent_services, $primary, disable_pxp => false)
     run_task(enterprise_tasks::add_modify_conf_keys, $primary, file => $constants['pe_conf'], hash => {'puppet_enterprise::packages::installing' => true})
 
     if ($mode == 'sync') {
@@ -46,12 +44,8 @@ plan enterprise_tasks::ha_puppetdb_sync(
     }
   }
   out::message('Applying original agent state...')
-  apply($primary) {
-    $service_status
-  }
+  run_command("puppet resource service puppet ensure=${status_hash[status]} enable=${status_hash[enabled]}", $primary)
   if $result_or_error =~ Error {
     return fail_plan($result_or_error)
-  } else {
-    return $result_or_error
   }
 }

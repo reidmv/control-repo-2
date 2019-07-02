@@ -16,7 +16,7 @@ class VerifyNode < TaskHelper
     PuppetX::Puppetlabs::Meep::HieraAdapter.new(enterprise_hiera_yaml)
   end
 
-  def hiera_lookup(hiera_param, hostname)
+  def hiera_lookup(hiera_param, certname)
     node = PuppetX::Puppetlabs::Meep::HieraAdapter.get_node
     scope = PuppetX::Puppetlabs::Meep::HieraAdapter.generate_scope(node)
     result = enterprise_lookup_handle.lookup("puppet_enterprise::#{hiera_param}", scope)
@@ -24,11 +24,11 @@ class VerifyNode < TaskHelper
     if result.nil?
       false
     else
-      result.is_a?(Array) ? result.include?(hostname) : result == hostname
+      result.is_a?(Array) ? result.include?(certname) : result == certname
     end
   end
 
-  def task(hostname:, expected_type:, allow_failure: false, **kwargs)
+  def task(certname:, expected_type:, allow_failure: false, **kwargs)
     # Add the Bolt _installdir to Ruby's load_path to pick up pe_infrastructure helper methods
     # This looks a bit awkward since normally requires are at the top, but to load all the correct files,
     #   we need to use the _installdir param that isn't available before the task() method is caled
@@ -37,7 +37,6 @@ class VerifyNode < TaskHelper
     Puppet.initialize_settings
     Puppet.initialize_facts
 
-    hostname = Open3.capture2e('facter fqdn')[0].strip if hostname == 'localhost'
     hiera_param = {
       'master'   => 'puppet_master_host',
       'ca'       => 'certificate_authority_host',
@@ -57,10 +56,10 @@ class VerifyNode < TaskHelper
 
       verified = status_one.exitstatus.zero? && status_two.exitstatus == 1
     else
-      verified = hiera_lookup(hiera_param[expected_type], hostname)
+      verified = hiera_lookup(hiera_param[expected_type], certname)
     end
     n = (expected_type == 'agent') ? 'n' : ''
-    raise TaskHelper::Error.new("#{hostname} does not appear to be a#{n} #{expected_type} host.", 'pe.verify-node/node-verification-failed', '') if !allow_failure && !verified
+    raise TaskHelper::Error.new("#{certname} does not appear to be a#{n} #{expected_type} host.", 'pe.verify-node/node-verification-failed', '') if !allow_failure && !verified
 
     result = { node_verified: verified }
     result.to_json
