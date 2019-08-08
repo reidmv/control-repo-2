@@ -1,3 +1,10 @@
+def default_branch(default)
+  match = /(.+)_(cdpe|cdpe_ia)_\d+$/.match(@librarian.environment.name)
+  match ? match[1]:default
+rescue
+  default
+end
+
 forge 'https://forge.puppet.com'
 
 # Modules from the Puppet Forge
@@ -21,6 +28,11 @@ mod 'puppetlabs-apply_helpers', '0.1.0'
 mod 'puppetlabs-stdlib', '6.0.0'
 mod 'WhatsARanjit-node_manager', '0.7.2'
 
+mod 'reidmv-fail_fast',
+  :git => 'file:///Users/reidmv/src/reidmv-fail_fast/.git',
+  :branch => :control_branch, :default_branch => 'master'
+
 mod 'reidmv-pe_ha_failover',
-  git: 'https://github.com/reidmv/reidmv-pe_ha_failover.git',
-  ref: 'master'
+  :git => 'https://github.com/reidmv/reidmv-pe_ha_failover.git',
+  :branch => :control_branch, :default_branch => 'master'
+
