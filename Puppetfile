@@ -25,8 +25,12 @@ forge 'https://forge.puppet.com'
 mod 'puppetlabs-ruby_task_helper', '0.3.0'
 mod 'puppetlabs-bolt_shim', '0.3.0'
 mod 'puppetlabs-apply_helpers', '0.1.0'
-mod 'puppetlabs-stdlib', '6.0.0'
+mod 'puppetlabs-stdlib', '6.1.0'
 mod 'WhatsARanjit-node_manager', '0.7.2'
+mod 'puppet-cassandra', '2.7.3'
+mod 'puppetlabs-firewall', '2.1.0'
+mod 'puppetlabs-inifile', '4.0.0'
+
 
 mod 'reidmv-fail_fast',
   :git => 'file:///Users/reidmv/src/reidmv-fail_fast/.git',
