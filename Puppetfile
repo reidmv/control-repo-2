@@ -31,11 +31,6 @@ mod 'puppet-cassandra', '2.7.3'
 mod 'puppetlabs-firewall', '2.1.0'
 mod 'puppetlabs-inifile', '4.0.0'
 
-
-mod 'reidmv-fail_fast',
-  :git => 'file:///Users/reidmv/src/reidmv-fail_fast/.git',
-  :branch => :control_branch, :default_branch => 'master'
-
 mod 'reidmv-pe_ha_failover',
   :git => 'https://github.com/reidmv/reidmv-pe_ha_failover.git',
   :branch => :control_branch, :default_branch => 'master'
