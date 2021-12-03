@@ -1,0 +1,3 @@
+class policy::test {
+
+}
