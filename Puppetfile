@@ -17,6 +17,6 @@ mod 'reidmv-pe_ha_failover',
   git: 'https://github.com/reidmv/reidmv-pe_ha_failover.git',
   branch: 'master'
 
-mod 'reidmv-puppet_data_service',
-  git: 'https://github.com/reidmv/reidmv-puppet_data_service.git',
+mod 'puppetlabs-puppet_data_service',
+  git: 'https://github.com/puppetlabs/puppetlabs-puppet_data_service.git',
   branch: 'main'
