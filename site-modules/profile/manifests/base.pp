@@ -9,7 +9,7 @@ class profile::base {
 
   concat::fragment { 'profiles.txt: profile::base':
     target  => '/var/cache/profiles.txt',
-    content => 'profile::base',
+    content => "profile::base\n",
   }
 
 }
