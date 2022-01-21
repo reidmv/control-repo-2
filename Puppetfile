@@ -2,6 +2,7 @@ forge 'https://forge.puppet.com'
 
 # Modules from the Puppet Forge
 mod 'puppet-cassandra', '3.1.0'
+mod 'puppetlabs-concat', '7.1.1'
 mod 'puppetlabs-apply_helpers', '0.2.1'
 mod 'puppetlabs-apt', '7.7.0'
 mod 'puppetlabs-bolt_shim', '0.3.2'
