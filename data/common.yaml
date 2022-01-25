@@ -1,2 +1,6 @@
 ---
+lookup_options:
+  "^relay::.*token":
+    convert_to: "Sensitive"
+
 message: "This node is using common data"
