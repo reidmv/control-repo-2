@@ -23,3 +23,7 @@ mod 'reidmv-pe_ha_failover',
 mod 'puppetlabs-puppet_data_service',
   git: 'https://github.com/puppetlabs/puppetlabs-puppet_data_service.git',
   branch: 'main'
+
+mod 'puppetlabs-satellite_pe_tools',
+  git: 'https://github.com/reidmv/puppetlabs-satellite_pe_tools.git',
+  branch: 'trusted-external-command'
