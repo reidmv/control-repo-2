@@ -32,3 +32,6 @@ node default {
 
 # Whatever classes are defined in the PDS, include them.
 include(pick(getvar('trusted.external.pds.classes'), []))
+
+# Whatever classes are defined in Satellite, include them.
+satellite_pe_tools::include_satellite_classes()
