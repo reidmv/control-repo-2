@@ -1,5 +1,0 @@
-{
-  "description": "Stop the puppetserver service",
-  "files": ["ruby_task_helper/files/task_helper.rb"],
-  "input_method": "stdin"
-}

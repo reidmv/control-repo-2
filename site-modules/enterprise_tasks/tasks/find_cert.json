@@ -1,5 +1,0 @@
-{
-  "description": "Find a certificate on a given host",
-  "files": ["ruby_task_helper/files/task_helper.rb"],
-  "input_method": "stdin"
-}

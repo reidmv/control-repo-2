@@ -1,5 +1,0 @@
----
-modulepath: "/opt/puppetlabs/installer/share/boltdir/site:/opt/puppetlabs/server/data/environments/enterprise/modules"
-log:
-  /var/log/puppetlabs/installer/bolt_debug.log:
-    level: debug

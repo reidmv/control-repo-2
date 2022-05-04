@@ -1,5 +1,0 @@
-{
-  "description": "Disable CA-related services on a master host",
-  "files": ["ruby_task_helper/files/task_helper.rb"],
-  "input_method": "stdin"
-}

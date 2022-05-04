@@ -1,6 +1,0 @@
-#!/opt/puppetlabs/puppet/bin/ruby
-
-require 'puppet/util/command_line'
-argv = ['infrastructure', '--environmentpath', '/opt/puppetlabs/server/data/environments', '--environment', 'enterprise']
-argv += ARGV.clone
-Puppet::Util::CommandLine.new('puppet', argv).execute
